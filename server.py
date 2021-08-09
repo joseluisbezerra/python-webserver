@@ -4,6 +4,7 @@ from http.server import BaseHTTPRequestHandler
 
 from routes.main import routes
 
+from response.staticHandler import StaticHandler
 from response.templateHandler import TemplateHandler
 from response.badRequestHandler import BadRequestHandler
 
@@ -22,9 +23,11 @@ class Server(BaseHTTPRequestHandler):
                 handler.find(routes[self.path])
             else:
                 handler = BadRequestHandler()
-
-        else:
+        elif request_extension == ".py":
             handler = BadRequestHandler()
+        else:
+            handler = StaticHandler()
+            handler.find(self.path)
 
         self.respond({
             'handler': handler
@@ -43,7 +46,10 @@ class Server(BaseHTTPRequestHandler):
 
         self.end_headers()
 
-        return bytes(content, 'UTF-8')
+        if isinstance(content, bytes):
+            return content
+        else:
+            return bytes(content, 'UTF-8')
 
     def respond(self, opts):
         response = self.handle_http(opts['handler'])
