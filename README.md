@@ -1,17 +1,17 @@
 # Python Web Server
-Simples servidor web feito com python para fins didáticos
+Simple web server made with python for teaching purposes
 
-# Instalação
-1. Crie um ambiente virtual:
+# Installation
+1. Create a virtual environment:
 ```
 python -m venv venv
 ```
-2. Ative o ambiente virtual;
-3. Instale as dependências:
+2. Activate the virtual environment;
+3. Install dependencies:
 ```
 (venv) pip install -r requirements.txt
 ```
-4. Teste o servidor (localhost:8000 no navegador):
+4. Test the server (localhost:8000 in browser):
 ```
 (venv) python main.py
 ```
